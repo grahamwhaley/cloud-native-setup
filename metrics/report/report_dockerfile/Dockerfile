@@ -31,7 +31,8 @@ RUN apt-get update -qq && \
 # Install the extra R packages we need.
 RUN install2.r --error --deps TRUE \
 	gridExtra \
-	ggpubr
+	ggpubr \
+	elastic
 
 # Pull in our actual worker scripts
 COPY . /scripts
