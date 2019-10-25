@@ -1,0 +1,39 @@
+{
+    "apiVersion": "apps/v1",
+    "kind": "Deployment",
+    "metadata": {
+        "labels": {
+            "run": "stressng"
+        },
+        "name": "@DEPLOYMENT@"
+    },
+    "spec": {
+        "replicas": @REPLICAS@,
+        "selector": {
+            "matchLabels": {
+                "run": "stressng"
+            }
+        },
+        "template": {
+            "metadata": {
+                "labels": {
+                    "run": "stressng",
+                    "@LABEL@": "@LABELVALUE@"
+                }
+            },
+            "spec": {
+                "terminationGracePeriodSeconds": @GRACE@,
+                "runtimeClassName": "@RUNTIMECLASS@",
+                "automountServiceAccountToken": false,
+                "containers": [{
+                    "name": "stressng",
+                    "image": "polinux/stress-ng",
+                    "command": @PODCOMMAND@,
+                    "stdin": true,
+                    "tty": true
+                }],
+                "restartPolicy": "Always"
+            }
+        }
+    }
+}
