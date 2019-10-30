@@ -17,7 +17,8 @@ suppressMessages(library(jsonlite))			# to load the data.
 resultsfiles=c(
 	"k8s-parallel.json",
 	"k8s-scaling.json",
-	"k8s-rapid.json"
+	"k8s-rapid.json",
+	"k8s-cpustress.json"
 	)
 
 data=c()
