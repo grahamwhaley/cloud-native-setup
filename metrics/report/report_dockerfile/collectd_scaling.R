@@ -399,6 +399,7 @@ mem_line_plot <- ggplot() +
 	ylab("System Avail (Gb)") +
 	scale_y_continuous(labels=comma, sec.axis=sec_axis(~ ./mem_scale, name="pods")) +
 	ggtitle("System Memory free") +
+	theme(legend.position="bottom") +
 	theme(axis.text.x=element_text(angle=90))
 
 page1 = grid.arrange(
@@ -436,6 +437,7 @@ cpu_line_plot <- ggplot() +
 	xlab("seconds") +
 	ylab("System CPU Idle (%)") +
 	ggtitle("System CPU usage") +
+	theme(legend.position="bottom") +
 	theme(axis.text.x=element_text(angle=90))
 
 page2 = grid.arrange(
@@ -460,6 +462,7 @@ boot_line_plot <- ggplot() +
 	xlab("pods") +
 	ylab("Boot time (s)") +
 	ggtitle("Pod boot time") +
+	theme(legend.position="bottom") +
 	theme(axis.text.x=element_text(angle=90))
 
 page3 = grid.arrange(
@@ -497,6 +500,7 @@ inode_line_plot <- ggplot() +
 	ylab("inodes free") +
 	scale_y_continuous(labels=comma, sec.axis=sec_axis(~ ./inode_scale, name="pods")) +
 	ggtitle("inodes free") +
+	theme(legend.position="bottom") +
 	theme(axis.text.x=element_text(angle=90))
 
 page4 = grid.arrange(
@@ -537,6 +541,7 @@ interface_packet_line_plot <- ggplot() +
 	ylab("packets") +
 	scale_y_continuous(labels=comma, sec.axis=sec_axis(~ ./ip_scale, name="pods")) +
 	ggtitle("interface packets") +
+	theme(legend.position="bottom") +
 	theme(axis.text.x=element_text(angle=90))
 
 interface_octet_line_plot <- ggplot() +
@@ -567,6 +572,7 @@ interface_octet_line_plot <- ggplot() +
 	ylab("octets") +
 	scale_y_continuous(labels=comma, sec.axis=sec_axis(~ ./oct_scale, name="pods")) +
 	ggtitle("interface octets") +
+	theme(legend.position="bottom") +
 	theme(axis.text.x=element_text(angle=90))
 
 
@@ -608,6 +614,7 @@ interface_drop_line_plot <- ggplot() +
 	ylab("drops") +
 	scale_y_continuous(labels=comma, sec.axis=sec_axis(~ ./drop_scale, name="pods")) +
 	ggtitle("interface drops") +
+	theme(legend.position="bottom") +
 	theme(axis.text.x=element_text(angle=90))
 
 interface_error_line_plot <- ggplot() +
@@ -638,6 +645,7 @@ interface_error_line_plot <- ggplot() +
 	ylab("errors") +
 	scale_y_continuous(labels=comma, sec.axis=sec_axis(~ ./error_scale, name="pods")) +
 	ggtitle("interface errors") +
+	theme(legend.position="bottom") +
 	theme(axis.text.x=element_text(angle=90))
 
 page6 = grid.arrange(
