@@ -290,27 +290,20 @@ for (currentdir in resultdirs) {
 	
 				# calculate scaling for secondary y axis
 				# the two y scales, in R, must be mathematically related
-				mem_scale = max(c(mem_scale,
-								  (max(mem_free_data$value) / (1024*1024*1024)) / num_pods))
-				cpu_scale = max(c(cpu_scale,
-								  max(cpu_idle_data$value) / num_pods))
-				inode_scale = max(c(inode_scale,
-									max(inode_free_data$value) / num_pods))
-				ip_scale = max(c(ip_scale,
-								 max(c(max(interface_packets_data$tx, na.rm=TRUE),
-									   max(interface_packets_data$rx, na.rm=TRUE))) / num_pods))
-				oct_scale = max(c(oct_scale,
-								  max(c(max(interface_octets_data$tx, na.rm=TRUE),
-										max(interface_octets_data$rx, na.rm=TRUE))) / num_pods))
+				mem_scale = (max(mem_free_data$value) / (1024*1024*1024)) / num_pods
+				cpu_scale = max(cpu_idle_data$value) / num_pods
+				inode_scale = max(inode_free_data$value) / num_pods
+				ip_scale = max(c(max(interface_packets_data$tx, na.rm=TRUE),
+					max(interface_packets_data$rx, na.rm=TRUE))) / num_pods
+				oct_scale = max(c(max(interface_octets_data$tx, na.rm=TRUE),
+					max(interface_octets_data$rx, na.rm=TRUE))) / num_pods
 				# drops and scale are often 0, so providing 1 so we won't scale by infinity
-				drop_scale = max(c(drop_scale,
-								   max(c(1,
-										 max(interface_dropped_data$tx, na.rm=TRUE),
-										 max(interface_dropped_data$rx, na.rm=TRUE))) / num_pods))
-				error_scale = max(c(error_scale,
-									max(c(1,
-										  max(interface_errors_data$tx, na.rm=TRUE),
-										  max(interface_errors_data$rx, na.rm=TRUE))) / num_pods))
+				drop_scale = max(c(1,
+					max(interface_dropped_data$tx, na.rm=TRUE),
+					max(interface_dropped_data$rx, na.rm=TRUE))) / num_pods
+				error_scale = max(c(1,
+					max(interface_errors_data$tx, na.rm=TRUE),
+					max(interface_errors_data$rx, na.rm=TRUE))) / num_pods
 	
 				# We get data in b, but want the graphs in Gb.
 				memtotal = memtotal / (1024*1024*1024)
