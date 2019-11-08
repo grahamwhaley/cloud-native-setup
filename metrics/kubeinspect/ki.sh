@@ -17,15 +17,15 @@ uidarray=($uids)
 qos=$(jq ".items | .[] | .status.qosClass" <<< "$allpods")
 qosarray=($qos)
 
-echo "Podnames: $podnames"
+#echo "Podnames: $podnames"
 #echo "Podarray: $podarray"
-echo "UIDs: $uids"
+#echo "UIDs: $uids"
 #echo "UIDarray: $uidarray"
 
 for n in $(seq 0 $((${#podarray[@]}-1)) ); do
 	echo "Pod ${podarray[$n]} : ${uidarray[$n]} : ${qosarray[$n]}"
 	uid=${uidarray[$n]//\"/}
-	shortuid=${uid:0:6}
+	shortuid=${uid:0:7}
 	qos=${qosarray[$n]//\"/}
 
 	case ${qos} in
@@ -52,6 +52,7 @@ for n in $(seq 0 $((${#podarray[@]}-1)) ); do
 		vshortcg=${shortcg%/}
 		vshortcg=${vshortcg##*/}
 		vshortcg=${vshortcg:0:10}
+		[ pod"$shortuid" != "$vshortcg" ] && echo -n "    "
 		echo -n "    Examine $vshortcg: "
 		cpuset=$(cgget -v -n -r cpuset.cpus ${shortcg})
 		echo "cpuset: $cpuset"
