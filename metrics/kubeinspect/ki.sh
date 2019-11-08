@@ -25,6 +25,7 @@ echo "UIDs: $uids"
 for n in $(seq 0 $((${#podarray[@]}-1)) ); do
 	echo "Pod ${podarray[$n]} : ${uidarray[$n]} : ${qosarray[$n]}"
 	uid=${uidarray[$n]//\"/}
+	shortuid=${uid:0:6}
 	qos=${qosarray[$n]//\"/}
 
 	case ${qos} in
@@ -45,11 +46,14 @@ for n in $(seq 0 $((${#podarray[@]}-1)) ); do
 
 
 	cpusets=($(lscgroup ${setname}))
-	echo "cpusets are [${cpusets[@]}]"
+	#echo "cpusets are [${cpusets[@]}]"
 	for cg in ${cpusets[@]}; do
 		shortcg=${cg/cpuset://}
-		echo "    Examine $shortcg"
+		vshortcg=${shortcg%/}
+		vshortcg=${vshortcg##*/}
+		vshortcg=${vshortcg:0:10}
+		echo -n "    Examine $vshortcg: "
 		cpuset=$(cgget -v -n -r cpuset.cpus ${shortcg})
-		echo "        $cpuset"
+		echo "cpuset: $cpuset"
 	done
 done
